@@ -1,0 +1,45 @@
+{
+  "name": "hometask-2gulp",
+  "version": "1.0.0",
+  "description": "hometask-2",
+  "main": "index.html",
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ALEXA85-58/hometask-2gulp.git"
+  },
+  "keywords": [
+    "html",
+    "hometask-2gulp",
+    "git",
+    "branches"
+  ],
+  "author": "ALEXA85-58",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ALEXA85-58/hometask-2gulp/issues"
+  },
+  "homepage": "https://github.com/ALEXA85-58/hometask-2gulp#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "bootstrap": "^4.6.0",
+    "jquery": "^3.6.0"
+  },
+  "browserslist": [
+    "last 1 version, > 1%, IE 10"
+  ],
+  "devDependencies": {
+    "browser-sync": "^2.27.5",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rigger": "^0.5.8",
+    "gulp-rimraf": "^1.0.0",
+    "gulp-sass": "^5.0.0",
+    "gulp-terser": "^2.0.1",
+    "node-sass": "^6.0.1"
+  }
+}
