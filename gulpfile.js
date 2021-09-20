@@ -28,7 +28,11 @@ const path = {
         img:'src/img/**/*.{jpg,gif,jpeg,png,svg,webp}',
     },
     watch:{
-      html:'src/*.{html,htm}',
+        html:'src/*.{html,htm}',
+        scss:'src/scss/**/*.scss',
+        js:'src/js/**/*.js',
+        fonts:'src/fonts/**/*.{eot,svg,ttf,woff,woff2}',
+        img:'src/img/**/*.{jpg,gif,jpeg,png,svg,webp}',
     },
     clean:'build/'
 },
@@ -50,8 +54,16 @@ gulp.task('clean', function (done){
 gulp.task('mv:fonts', function (done){
     gulp.src(path.src.fonts)
         .pipe(plumber())
-        .pipe(gulp.dest(path.build.fonts));
+        .pipe(gulp.dest(path.build.fonts))
+        .pipe(reload({stream:true}));
     done()
+});
+
+gulp.task('mv:img', function (done) {
+    gulp.src(path.src.img)
+        .pipe(gulp.dest(path.build.img))
+        .pipe(reload({stream:true}));
+    done();
 });
 
 gulp.task('build:html', function (done){
@@ -68,7 +80,7 @@ done();
 });
 
 gulp.task('build:scss', function (done){
-    gulp.src(path.src.scss)
+    gulp.src(path.src.scss,{sourcemaps:true})
         .pipe(plumber())
         .pipe(sass({
             outputStyle:'compressed'
@@ -77,7 +89,7 @@ gulp.task('build:scss', function (done){
             cascade:false,
             remove:true
         }))
-        .pipe(gulp.dest(path.build.scss))
+        .pipe(gulp.dest(path.build.scss,{sourcemaps:'.'}))
         .pipe(reload({stream:true}));
     done();
 });
@@ -93,7 +105,11 @@ gulp.task('build:js', function (done){
 });
 
 gulp.task('watch', function (done){
-    gulp.watch(path.watch.html, gulp.series('build:html'))
+    gulp.watch(path.watch.html, gulp.series('build:html'));
+    gulp.watch(path.watch.scss, gulp.series('build:scss'));
+    gulp.watch(path.watch.js, gulp.series('build:js'));
+    gulp.watch(path.watch.fonts, gulp.series('mv:fonts'));
+    gulp.watch(path.watch.img, gulp.series('mv:img'));
     done();
 });
 
@@ -102,4 +118,4 @@ gulp.task('webserver', function (done){
    done();
 });
 
-gulp.task('default', gulp.series('clean',gulp.parallel('mv:fonts','build:js','build:html','build:scss'),'watch','webserver'));
+gulp.task('default', gulp.series('clean',gulp.parallel('mv:fonts','build:js','build:html','build:scss','mv:img'),'watch','webserver'));
